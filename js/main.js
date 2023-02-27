@@ -1,56 +1,6 @@
-let teacher = [];
-
-let score = [
-  {
-    about:
-      "Sodiq School maktabida Matematika fani o‘qituvchisi. Jizzax Davlat Pedagogika Universiteti Akademik Litseyida  matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan o‘qituvchi lavozimida va Jizzax shahridagi Prezident maktabi Matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan To‘garak rahbari kabi lavozimlarda faoliyat yuritgan. Jizzaxdagi EDU SULTON NTM rahbari bo‘lgan.",
-    id: 21,
-    link: [ "cf790cb8-da27-4aa3-9771-93f955d1125c"],
-    heading: "Bubur Bediyev",
-    types: "tus",
-    created_at: ""
-  },
-  {
-    about:
-      "Sodiq School maktabida Matematika fani o‘qituvchisi. Jizzax Davlat Pedagogika Universiteti Akademik Litseyida  matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan o‘qituvchi lavozimida va Jizzax shahridagi Prezident maktabi Matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan To‘garak rahbari kabi lavozimlarda faoliyat yuritgan. Jizzaxdagi EDU SULTON NTM rahbari bo‘lgan.",
-    id: 21,
-    link: [ "1ec22453-e745-4e35-b47e-8975d4d0f705"],
-    heading: "Bubur Bediyev",
-    types: "tus",
-    created_at: ""
-  },
-  {
-    about:
-      "Sodiq School maktabida Matematika fani o‘qituvchisi. Jizzax Davlat Pedagogika Universiteti Akademik Litseyida  matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan o‘qituvchi lavozimida va Jizzax shahridagi Prezident maktabi Matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan To‘garak rahbari kabi lavozimlarda faoliyat yuritgan. Jizzaxdagi EDU SULTON NTM rahbari bo‘lgan.",
-    id: 21,
-    link: [ "4809157c-b5ab-4ecf-a860-1b9dde29c444"],
-    heading: "Bubur Bediyev",
-    types: "tus",
-    created_at: ""
-  },
-  {
-    about:
-      "Sodiq School maktabida Matematika fani o‘qituvchisi. Jizzax Davlat Pedagogika Universiteti Akademik Litseyida  matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan o‘qituvchi lavozimida va Jizzax shahridagi Prezident maktabi Matematika fanidan iqtidorli o‘quvchilar bilan ishlaydigan To‘garak rahbari kabi lavozimlarda faoliyat yuritgan. Jizzaxdagi EDU SULTON NTM rahbari bo‘lgan.",
-    id: 21,
-    link: [ "4809157c-b5ab-4ecf-a860-1b9dde29c444"],
-    heading: "Bubur Bediyev",
-    types: "tus",
-    created_at: ""
-  },
-];
 
 
-fetch('http://164.92.193.48:7060/api/team')
-      .then(response => response.json())
-      .then(json => teacher = json.body)
-
-console.log(teacher);
-
-// Get the modal
 var modal = document.getElementById("myModal");
-var teachers = document.getElementById("teachers");
-var scores = document.getElementById("score");
-
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
 
@@ -74,14 +24,40 @@ window.onclick = function (event) {
   }
 };
 
- function renderTeacher() {
+
+let teacher = [];
+
+let score = [];
+
+
+fetch('http://164.92.193.48:7060/api/team')
+      .then(response => response.json())
+      .then(json => {
+        teacher = json
+        renderTeacher(teacher.body);
+  });
+fetch('http://164.92.193.48:7060/api/news')
+      .then(response => response.json())
+      .then(json => {
+        score =  json.body.filter((item) => {
+          return item.types == "tsc"
+        });
+        renderScore(score);
+  });
+// Get the modal
+var teachers = document.getElementById("teachers");
+var scores = document.getElementById("score");
+var new1 = document.getElementById("new");
+var teach = document.getElementsByClassName("slteach");
+
+ function renderTeacher(teacher) {
   // div.className = "team-members",
-  teacher.forEach((item) => {
+  teacher.forEach((item, index) => {
     let devOne = document.createElement("div");
     devOne.className = "team-members";
     devOne.innerHTML = `
-        <div class="team-one">
-          <div class="team-item" onClick={handleOpen}>
+        <div class="team-one" onclick="${teacherModalOpen(item)}">
+          <div class="team-item">
             <div class="image-blog">
               <img class="image" src="https://api.msodiqschool.uz/uploads/${item.link}.jpg"
                 alt="jamo" width="350" height="500" />
@@ -89,15 +65,17 @@ window.onclick = function (event) {
           </div>
         </div>
     `;
-    teachers.appendChild(devOne);
-
+    teach[index+1].appendChild(devOne);
   });
 };
 
 renderTeacher();
 
+function teacherModalOpen(data) {
+  console.log(data);
+}
 
-function renderScore() {
+function renderScore(score) {
   score.forEach((item) => {
     let devOne = document.createElement("div");
     devOne.className = "score-item";
@@ -116,7 +94,3 @@ function renderScore() {
 };
 
 renderScore();
-
-
-
-console.log();
