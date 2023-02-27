@@ -1,8 +1,8 @@
 
 
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("openMenu");
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("menuBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementById("nclose");
@@ -44,6 +44,7 @@ fetch('http://164.92.193.48:7060/api/news')
         });
         renderScore(score);
   });
+
 // Get the modal
 var teachers = document.getElementById("teachers");
 var scores = document.getElementById("score");
@@ -71,8 +72,8 @@ var teach = document.getElementsByClassName("slteach");
 
 renderTeacher();
 
-function teacherModalOpen(data) {
-  console.log(data);
+function teacherModalOpen(e) {
+  console.log(e);
 }
 
 function renderScore(score) {
@@ -94,3 +95,4 @@ function renderScore(score) {
 };
 
 renderScore();
+

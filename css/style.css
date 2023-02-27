@@ -8,6 +8,7 @@ html {
   scroll-behavior: smooth;
 }
 
+
 *,
 *::before,
 *::after {
@@ -26,6 +27,8 @@ body {
   background-color: #fff;
   overflow: visible;
   overflow-x: hidden;
+  padding-top: 105px;
+  /* background:rgb(6, 18, 60); */
 }
 
 img {
@@ -53,9 +56,14 @@ img {
 }
 
 .site-header {
+  position: fixed;
+  width: 100%;
   background-color: #05123d;
   color: #fff;
   padding: 20px 0;
+  top: 0;
+  z-index: 1000;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .header-row {
@@ -787,17 +795,23 @@ img {
     width: 1440px;
   }
 }
-@media only screen and (max-width: 1200px) {
+
+@media only screen and (max-width: 1300px) {
+
+
+  .nav-link {
+    font-size: 18px;
+  }
   .container {
     width: 90%;
   }
 
   .container-about {
-    width: 95%;
+    width: 90%;
   }
 
   .nav-list {
-    width: 100%;
+    width: 100% !important;
   }
 
   .autoplay {
@@ -883,6 +897,12 @@ img {
 }
 
 @media only screen and (max-width: 767px) {
+  body {
+    padding-top: 80px;
+  }
+  .logo img{
+    width: 140px;
+  }
   .slider-title {
     font-size: 30px;
     width: 90%;
