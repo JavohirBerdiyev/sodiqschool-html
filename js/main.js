@@ -33,8 +33,8 @@ let score = [];
 fetch('http://164.92.193.48:7060/api/team')
       .then(response => response.json())
       .then(json => {
-        teacher = json
-        renderTeacher(teacher.body);
+        teacher = json.body;
+        renderTeacher(teacher);
   });
 fetch('http://164.92.193.48:7060/api/news')
       .then(response => response.json())
@@ -50,6 +50,8 @@ var teachers = document.getElementById("teachers");
 var scores = document.getElementById("score");
 var new1 = document.getElementById("new");
 var teach = document.getElementsByClassName("slteach");
+var scoreList = document.getElementsByClassName("slscore");
+var teacherModal = document.getElementById("teachermodal");
 
  function renderTeacher(teacher) {
   // div.className = "team-members",
@@ -57,7 +59,7 @@ var teach = document.getElementsByClassName("slteach");
     let devOne = document.createElement("div");
     devOne.className = "team-members";
     devOne.innerHTML = `
-        <div class="team-one" onclick="${teacherModalOpen(item)}">
+        <div class="team-one" onclick="teacherModalOpen(${item.id})">
           <div class="team-item">
             <div class="image-blog">
               <img class="image" src="https://api.msodiqschool.uz/uploads/${item.link}.jpg"
@@ -72,9 +74,29 @@ var teach = document.getElementsByClassName("slteach");
 
 renderTeacher();
 
-function teacherModalOpen(e) {
-  console.log(e);
+function teacherModalOpen(id) {
+  let items = teacher.filter(item => item.id == id);
+  let content = document.createElement("div");
+  content.className="content";
+  console.log(items);
+  content.innerHTML = `
+  <div class="close" onclick="closeModal()"><i class='bx bx-x'></i></div>
+      <div class="content">
+        <img class="modal-img" src="https://api.msodiqschool.uz/uploads/${items[0].link}.jpg" alt="img">
+        <h2 class="modal-title">${items[0].name}</h2>
+        <p class="modal-text">${items[0].about}</p>
+      </div>
+  `;
+  teacherModal.appendChild(content);
+  teacherModal.style.display = "block";
 }
+
+function closeModal() {
+  teacherModal.style.display = "none";
+  teacherModal.innerHTML = "";
+}
+
+
 
 function renderScore(score) {
   score.forEach((item) => {
@@ -95,4 +117,5 @@ function renderScore(score) {
 };
 
 renderScore();
+
 
