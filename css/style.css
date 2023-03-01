@@ -169,7 +169,7 @@ img {
   background-image: url("../assets/images/about-one.png");
   background-size: cover;
 }
-.sliderbar.one {
+.sliderbar.ones {
   background-image: url("../assets/images/about-two.png");
 }
 .sliderbar.two {
@@ -829,7 +829,7 @@ img {
   z-index: 2000;
 }
 
-.one {
+.ones {
   position: absolute;
 }
 
@@ -964,6 +964,10 @@ img {
   }
   .one {
     margin-bottom: 30px;
+  }
+
+  .score-item{
+    width: 100% !important;
   }
 }
 
