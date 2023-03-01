@@ -68,7 +68,7 @@ var teacherModal = document.getElementById("teachermodal");
           </div>
         </div>
     `;
-    teach[index+1].appendChild(devOne);
+    teach[index+2].appendChild(devOne);
   });
 };
 
